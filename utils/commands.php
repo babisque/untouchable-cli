@@ -8,6 +8,5 @@ use Untouchable\Commands\{
 };
 
 return [
-    'Hello' => Hello::class,
-    'create-schema' => CreateSchema::class
+    'Hello' => Hello::class
 ];
