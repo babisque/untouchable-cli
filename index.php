@@ -2,6 +2,7 @@
 
 use Untouchable\Exceptions\InsufficientArgumentException;
 use Untouchable\Exceptions\InvalidCommandException;
+use Untouchable\Services\ArgumentsHandler;
 use Untouchable\Services\ConnectionCreator;
 use Dotenv\Dotenv;
 
@@ -17,14 +18,15 @@ if (count($argv) < 2) {
     throw new InsufficientArgumentException("Insufficient number of arguments");
 }
 
-$command = $argv[1];
+$command = strtolower($argv[1]);
 if (array_key_exists($command, $commands)) {
     $commandClass = $commands["$command"];
     $app = new $commandClass($pdo);
 
     if (count($argv) > 2) {
         $subcommandsOrArguments = array_slice($argv, 2);
-        $app->setSubcommandsOrArguments($subcommandsOrArguments);
+        $args = ArgumentsHandler::getArguments($subcommandsOrArguments);
+        $app->setSubcommandsOrArguments($args);
     }
 } else {
     throw new InvalidCommandException("Invalid '$command' command.");

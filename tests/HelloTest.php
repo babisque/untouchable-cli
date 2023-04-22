@@ -5,7 +5,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 use Untouchable\Commands\Hello;
 
-final class CommandTest extends TestCase
+final class HelloTest extends TestCase
 {
     public function testCommandHelloIsReturningHelloMessage()
     {
@@ -23,6 +23,5 @@ final class CommandTest extends TestCase
         $output = ob_get_clean();
 
         $this->assertEquals('hello', $output);
-
     }
 }
